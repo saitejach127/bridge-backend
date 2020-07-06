@@ -6,10 +6,20 @@ var app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-app.use(express.static(__dirname + "/public"))
+app.use(express.static(__dirname + "/public"));
 
 io.on("connection", (socket) => {
-    console.log(`New Conection ${socket.id}`);
+  console.log(`New Conection ${socket.id}`);
+
+  socket.on("joinRoom", ({ id }) => {
+    socket.join(id);
+  });
+
+  socket.on("message", (data) => {
+    console.log(data);
+    data = JSON.parse(data);
+    socket.to(data.id).emit("message", data);
+  });
 });
 
 const PORT = process.env.PORT || 5000;
