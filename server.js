@@ -21,6 +21,11 @@ io.on("connection", (socket) => {
     data = JSON.parse(data);
     socket.to(data.id).emit("message", data);
   });
+
+  socket.on("disconnect", () => {
+      console.log(`Disconnected ${socket.id}`);
+  })
+
 });
 
 const PORT = process.env.PORT || 5000;
