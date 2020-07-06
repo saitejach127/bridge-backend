@@ -8,6 +8,11 @@
 </head>
 <body>
     <h1>This is for testing as a client</h1>
+    <ol>
+        <li>Copy id from previous tab</li>
+        <li>Emit event of join room</li>
+        <li>Try emiting messages in message event ( The message should have id compulsory and it should br stringified before sending )</li>
+    </ol>
     <script>
         var socket = io.connect("http://localhost:5000");
         socket.on("message", (data) => {
