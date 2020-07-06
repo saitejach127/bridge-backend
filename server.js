@@ -13,6 +13,7 @@ io.on("connection", (socket) => {
 
   socket.on("joinRoom", ({ id }) => {
     socket.join(id);
+    console.log(`Added ${socket.id} to room ${id}`);
   });
 
   socket.on("message", (data) => {
