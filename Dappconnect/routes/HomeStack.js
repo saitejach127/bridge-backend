@@ -4,6 +4,7 @@ import Home from '../components/Home';
 import ImportAccounts from "../components/ImportAccounts";
 import Login from "../components/Login";
 import Accounts from "../components/Accounts";
+import Transaction from '../components/Transaction';
 
 const screens = {
     Home:{
@@ -17,6 +18,9 @@ const screens = {
     },
     Accounts : {
         screen : Accounts
+    },
+    Transaction : {
+        screen : Transaction
     }
 }
 

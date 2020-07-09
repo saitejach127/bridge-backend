@@ -22,6 +22,12 @@ io.on("connection", (socket) => {
     socket.to(data.id).emit("message", data);
   });
 
+  socket.on("transaction", (data) => {
+    data = JSON.parse(data);
+    console.log(data);
+    socket.to(data.id).emit("transaction", data);
+  })
+
   socket.on("disconnect", () => {
       console.log(`Disconnected ${socket.id}`);
   })
@@ -29,6 +35,6 @@ io.on("connection", (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
+server.listen(PORT,"0.0.0.0", () => {
   console.log(`Server listening on ${PORT}`);
 });

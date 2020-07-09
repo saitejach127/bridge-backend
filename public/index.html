@@ -12,13 +12,18 @@
     <h1>Only for ref</h1>
     <h3>Go to /test.html in new tab</h3>
     <div id="qrcode"></div>
+    <h3 id="account"></h3>
     <script>
         var socket = io.connect("http://localhost:5000");
         const id = uuid.v4();
         console.log(id);
-        var qrcode = new QRCode(document.getElementById("qrcode"),id);
         socket.emit("joinRoom", {id});
+        var qrcode = new QRCode(document.getElementById("qrcode"),id);
         socket.on("message", (data) => {
+            if(data.type === "account"){
+                document.getElementById("qrcode").style.display = "none";
+                document.getElementById("account").innerText = data.account.publickey;
+            }
             console.log(data);
         })
     </script>

@@ -1,4 +1,5 @@
-import * as React from "react";
+import "./global";
+import React from "react";
 import Navigator from "./routes/HomeStack";
 
 export default function App() {
