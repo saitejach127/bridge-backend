@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, AsyncStorage } from "react-native";
 import io from "socket.io-client";
 const Web3 = require("web3");
 
@@ -31,6 +31,13 @@ export default function Home({ navigation }) {
     navigation.navigate("Accounts");
   };
 
+  const removeAccount = async () => {
+    let account = await AsyncStorage.getItem("accounts");
+    if(account) {
+      await AsyncStorage.removeItem("accounts");
+    }
+  }
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -47,6 +54,8 @@ export default function Home({ navigation }) {
       <Button title="Login" onPress={loginHandler}></Button>
       <Text></Text>
       <Button title="List Accounts" onPress={accountsHandler}></Button>
+      <Text></Text>
+      <Button title="Remove Account" onPress={removeAccount}></Button>
     </View>
   );
 }

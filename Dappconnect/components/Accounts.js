@@ -6,10 +6,14 @@ export default function Accounts() {
 
   const getAccounts = async () => {
     var acc = await AsyncStorage.getItem("accounts");
-    acc = JSON.parse(acc);
-    acc = acc.accounts;
-    console.log(acc);
-    setaccounts(acc);
+    if(acc){
+      acc = JSON.parse(acc);
+      acc = acc.accounts;
+      console.log(acc);
+      setaccounts(acc);
+    } else {
+      setaccounts([]);
+    }
   };
 
   useEffect(() => {
