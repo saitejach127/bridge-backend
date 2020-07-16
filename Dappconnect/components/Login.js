@@ -30,6 +30,7 @@ export default function ({navigation}) {
     buf.account = accounts.accounts[0];
     buf.type = "account";
     socket.emit("message",JSON.stringify(buf));
+    await AsyncStorage.setItem("roomid", data);
   };
 
   const scanQr = () => {

@@ -14,7 +14,7 @@
     <div id="qrcode"></div>
     <h3 id="account"></h3>
     <script>
-        var socket = io.connect("http://localhost:5000");
+        var socket = io.connect("https://bridge.assetmonk.io");
         const id = uuid.v4();
         console.log(id);
         socket.emit("joinRoom", {id});

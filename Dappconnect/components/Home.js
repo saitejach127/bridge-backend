@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { View, Text, Button, StyleSheet, AsyncStorage } from "react-native";
 import io from "socket.io-client";
 const Web3 = require("web3");
 
-var socket = io.connect("http://192.168.43.242:5000");
+var socket = io.connect("https://bridge.assetmonk.io");
 var web3 = new Web3(
   new Web3.providers.HttpProvider(
     "https://bcnode1.assetmonk.io"
@@ -18,6 +18,18 @@ export default function Home({ navigation }) {
       web3 : web3
     });
   });
+
+  const joinRoom = async () => {
+    let roomid = await AsyncStorage.getItem("roomid");
+    if(roomid){
+      socket.emit("joinRoom", {id:roomid});
+      console.log("Joined the client to Room ", roomid);
+    }
+  }
+
+  useEffect(() => {
+    joinRoom();
+  },[]);
 
   const importHandler = () => {
     navigation.navigate("ImportAccounts");
